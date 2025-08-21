@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import ScoreCircle from "./ScoreCircle";
 
-const resumeCard = ({
+const ResumeCard = ({
   resume: { id, companyName, jobTitle, feedback, imagePath },
 }: {
   resume: Resume;
@@ -35,4 +35,4 @@ const resumeCard = ({
   );
 };
 
-export default resumeCard;
+export default ResumeCard;
