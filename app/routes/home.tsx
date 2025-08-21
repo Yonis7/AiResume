@@ -1,13 +1,10 @@
-// Import necessary types and components
-// Route type defines the expected props and metadata for this route
 import type { Route } from "./+types/home";
-// Import the navigation component to be used at the top of the page
 import Navbar from "../components/Navbar";
-// Import sample resume data from constants
 import { resumes } from "../../constants/index";
-
-// Import the ResumeCard component to display individual resumes
 import ResumeCard from "~/components/ResumeCard";
+import { usePuterStore } from "~/lib/puter";
+import { useNavigate } from "react-router"
+import { useEffect } from "react";
 
 // Meta function: Defines metadata for the page (used by React Router)
 // This information helps with SEO and browser tab display
@@ -24,6 +21,16 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+
+  const { auth } = usePuterStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // If authenticated redirect to home page
+    if (!auth.isAuthenticated) navigate("/auth?next=/");
+  }, [auth.isAuthenticated, navigate]);
+
+
 	return (
 		<main className="bg-[url('/images/bg-main.svg')] bg-cover">
 			<Navbar />
