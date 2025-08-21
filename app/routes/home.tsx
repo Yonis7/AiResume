@@ -7,42 +7,41 @@ import Navbar from "../components/Navbar";
 import { resumes } from "../../constants/index";
 
 // Import the ResumeCard component to display individual resumes
-import ResumeCard from "../components/resumeCard";
+import ResumeCard from "~/components/ResumeCard";
 
 // Meta function: Defines metadata for the page (used by React Router)
 // This information helps with SEO and browser tab display
 export function meta({}: Route.MetaArgs) {
-  return [
-    // Sets the browser tab title
-    { title: "Resume Scan" },
-    // Provides a description for search engines and social media sharing
-    {
-      name: "description",
-      content: "Enhanced feedback to land your dream job!",
-    },
-  ];
+	return [
+		// Sets the browser tab title
+		{ title: "Resume Scan" },
+		// Provides a description for search engines and social media sharing
+		{
+			name: "description",
+			content: "Enhanced feedback to land your dream job!",
+		},
+	];
 }
 
 export default function Home() {
-  return (
-    <main className="bg-[url('/images/bg-main.svg')] bg-cover">
-      <Navbar />
+	return (
+		<main className="bg-[url('/images/bg-main.svg')] bg-cover">
+			<Navbar />
 
-      <section className="main-section">
-        <div className="page-heading py-16">
-          <h1>Track you applications and resume scores</h1>
-          <h2>Review your resume with AI-powered feedback</h2>
-        </div>
-        </section>
+			<section className="main-section">
+				<div className="page-heading py-16 ">
+					<h1>Track you applications and resume scores</h1>
+					<h2>Review your resume with AI-powered feedback</h2>
+				</div>
+			</section>
 
-      {resumes.length > 0 && (
-        <div className="resumes-section">
-
-          {resumes.map((resume) => (
-            <ResumeCard key={resume.id} resume={resume} />
-          ))}
-        </div>
-      )}
-    </main>
-  );
+			{resumes.length > 0 && (
+				<div className="resumes-section ml-2 mr-2"> {/* or use individual margins */}
+					{resumes.map((resume) => (
+						<ResumeCard key={resume.id} resume={resume} />
+					))}
+				</div>
+			)}
+		</main>
+	);
 }
