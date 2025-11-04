@@ -1,8 +1,9 @@
-import {type FormEvent, useState} from 'react'
+import { type FormEvent, useState } from 'react'
 import Navbar from "~/components/Navbar";
 import FileUploader from "~/components/FileUploader";
-import {usePuterStore} from "~/lib/puter";
-import {useNavigate} from "react-router";
+import { usePuterStore } from "~/lib/puter";
+import { useNavigate } from "react-router";
+import type { H } from 'node_modules/react-router/dist/development/route-data-CqEmXQub.mjs';
 
 const Upload = () => {
     const { auth, isLoading, fs, ai, kv } = usePuterStore();
@@ -15,11 +16,11 @@ const Upload = () => {
         setFile(file)
     }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    throw new Error('Function not implemented.');
-  }
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 
-   return (
+    }
+
+    return (
         <main className="bg-[url('/images/bg-main.svg')] bg-cover">
             <Navbar />
 
@@ -51,7 +52,7 @@ const Upload = () => {
 
                             <div className="form-div">
                                 <label htmlFor="uploader">Upload Resume</label>
-                                <FileUploader />
+                                <FileUploader onFileSelect={handleFileSelect} />
                             </div>
 
                             <button className="primary-button" type="submit">

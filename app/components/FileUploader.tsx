@@ -6,20 +6,22 @@ interface FileUploaderProps {
     onFileSelect?: (file: File | null) => void;
 }
 
-const FileUploader = () => {
-
-    const [file, setFile] = useState();
-
-    // onDrop is called when files are dropped or selected
+const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        // acceptedFiles: array of File objects chosen by the user
         const file = acceptedFiles[0] || null;
 
+        onFileSelect?.(file);
     }, []);
 
-    // getRootProps, getInputProps: helpers for setting up the drop area and file input
-    // isDragActive: true when a file is being dragged over the drop area
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+    
+    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({
+        onDrop,
+        multiple: false,
+        accept: { "application/pdf": [".pdf"] },
+        maxSize : 20 * 1024 * 1024, // 20 MB
+    });
+
+    const file = acceptedFiles[0] || null;
 
     return (
         // This div is the drop area for files
@@ -33,20 +35,15 @@ const FileUploader = () => {
                     </div>
 
                     {file ? (
-                        <div>
-
-                        </div>
+                        <div></div>
                     ) : (
                         <div>
                             <p className="text-lg text-gray-500">
-                                <span className="font-semibold">
-                                    Click to upload
-                                </span> or drag and drop
+                                <span className="font-semibold">Click to upload</span> or drag and drop
                             </p>
                             <p className="text-lg text-gray-500">PDF (max 20 MB)</p>
                         </div>
                     )}
-
                 </div>
             </div>
         </div>
